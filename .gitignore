@@ -1,0 +1,8 @@
+build_release/
+build_debug/
+__pycache__/
+variables/__pycache__/
+.scons*
+.sconf_temp/
+precice-*
+config.log
