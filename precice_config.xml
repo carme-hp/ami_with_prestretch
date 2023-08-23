@@ -107,13 +107,13 @@
         <time-windows-reused value="15"/>
       </acceleration:IQN-ILS>
 
-      <max-iterations value="5" />
+      <max-iterations value="25" />
 
-      <relative-convergence-measure limit="1e-5" data="Displacement" mesh="TendonMeshLeft" strict="0"/>
-      <relative-convergence-measure limit="1e-5" data="Velocity" mesh="TendonMeshLeft" strict="0"/>
+      <relative-convergence-measure limit="1e-4" data="Displacement" mesh="TendonMeshLeft" strict="0"/>
+      <relative-convergence-measure limit="1e-4" data="Velocity" mesh="TendonMeshLeft" strict="0"/>
       <absolute-convergence-measure limit="1e-2" data="Traction" mesh="MuscleMeshLeft" strict="0"/>
 
-      <relative-convergence-measure limit="1e-5" data="Displacement" mesh="MuscleMeshRight" strict="0"/>
+      <relative-convergence-measure limit="1e-4" data="Displacement" mesh="MuscleMeshRight" strict="0"/>
       <relative-convergence-measure limit="1e-5" data="Velocity" mesh="MuscleMeshRight" strict="0"/>
       <absolute-convergence-measure limit="1e-2" data="Traction" mesh="TendonMeshRight" strict="0"/>
 

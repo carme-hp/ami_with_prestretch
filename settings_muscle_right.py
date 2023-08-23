@@ -98,9 +98,10 @@ for j in range(ny):
 
 k = nz-1 #fix free side of the muscle
 
-for j in range(ny):
+def update_dirichlet_bc(t):
+  for j in range(ny):
     for i in range(nx):
-      variables.elasticity_dirichlet_bc[k*nx*ny + j*nx + i] = [0.0, 0.0, 0.0, None,None,None] # displacement ux uy uz, velocity vx vy vz
+        variables.elasticity_dirichlet_bc[k*nx*ny + j*nx + i] = [0.0, 0.0, 0.0, None,None,None] # displacement ux uy uz, velocity vx vy vz
 
 # apply prestretch force on the top
 k = mz-1
@@ -514,14 +515,14 @@ config = {
                   "dirichletBoundaryConditions": variables.elasticity_dirichlet_bc,   # the initial Dirichlet boundary conditions that define values for displacements u and velocity v
                   "neumannBoundaryConditions":   variables.elasticity_neumann_bc,    # Neumann boundary conditions that define traction forces on surfaces of elements
                   "divideNeumannBoundaryConditionValuesByTotalArea": False,            # if the given Neumann boundary condition values under "neumannBoundaryConditions" are total forces instead of surface loads and therefore should be scaled by the surface area of all elements where Neumann BC are applied
-                  "updateDirichletBoundaryConditionsFunction": None,                  # muscle2_update_dirichlet_boundary_conditions_helper, function that updates the dirichlet BCs while the simulation is running
+                  "updateDirichletBoundaryConditionsFunction": update_dirichlet_bc,                  # muscle2_update_dirichlet_boundary_conditions_helper, function that updates the dirichlet BCs while the simulation is running
                   "updateDirichletBoundaryConditionsFunctionCallInterval": 1,         # every which step the update function should be called, 1 means every time step
                   "updateNeumannBoundaryConditionsFunction":   None,                    # function that updates the Neumann BCs while the simulation is running
                   "updateNeumannBoundaryConditionsFunctionCallInterval": 1,           # every which step the update function should be called, 1 means every time step
 
 
-                  "initialValuesDisplacements":  [[0.0,0.0,0.0] for _ in range(nx * ny * nz)],     # the initial values for the displacements, vector of values for every node [[node1-x,y,z], [node2-x,y,z], ...]
-                  "initialValuesVelocities":     [[0.0,0.0,0.0] for _ in range(nx * ny * nz)],     # the initial values for the velocities, vector of values for every node [[node1-x,y,z], [node2-x,y,z], ...]
+                  # "initialValuesDisplacements":  [[0.0,0.0,0.0] for _ in range(nx * ny * nz)],     # the initial values for the displacements, vector of values for every node [[node1-x,y,z], [node2-x,y,z], ...]
+                  # "initialValuesVelocities":     [[0.0,0.0,0.0] for _ in range(nx * ny * nz)],     # the initial values for the velocities, vector of values for every node [[node1-x,y,z], [node2-x,y,z], ...]
                   "extrapolateInitialGuess":     True,                                # if the initial values for the dynamic nonlinear problem should be computed by extrapolating the previous displacements and velocities
                   "constantBodyForce":           variables.constant_body_force,       # a constant force that acts on the whole body, e.g. for gravity
 
